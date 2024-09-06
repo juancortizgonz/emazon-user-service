@@ -1,4 +1,4 @@
-package com.emazon.user_service.infrastructure.config.entity;
+package com.emazon.user_service.infrastructure.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
