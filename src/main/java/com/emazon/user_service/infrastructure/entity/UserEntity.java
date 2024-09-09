@@ -37,7 +37,7 @@ public class UserEntity implements Serializable {
     @Column(name = "user_password", nullable = false)
     private String password;
 
-    @Column(name = "user_birthname", nullable = false)
+    @Column(name = "user_birthdate", nullable = false)
     private LocalDate birthDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
