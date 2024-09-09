@@ -3,6 +3,7 @@ package com.emazon.user_service.infrastructure.config.security.auth;
 import com.emazon.user_service.application.dto.auth.AuthenticationRequest;
 import com.emazon.user_service.application.dto.auth.AuthenticationResponse;
 import com.emazon.user_service.domain.exception.AuthenticationFailException;
+import com.emazon.user_service.infrastructure.config.security.jwt.JwtService;
 import com.emazon.user_service.infrastructure.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,7 @@ import javax.naming.AuthenticationException;
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final IUserRepository userRepository;
+    private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse auth(AuthenticationRequest request) {
@@ -29,13 +31,13 @@ public class AuthenticationService {
 
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-            Long UserId = userRepository.findByEmail(request.getEmail())
+            Long userId = userRepository.findByEmail(request.getEmail())
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"))
                     .getUserId();
 
-            // #ToDo: Call JWT to generate the token, is necessary to pass the ID
+            String jwtToken = jwtService.getToken(userDetails, userId);
 
-            return AuthenticationResponse.builder().build();
+            return AuthenticationResponse.builder().generatedToken(jwtToken).build();
         } catch (UsernameNotFoundException e) {
             throw new AuthenticationFailException("User not found");
         }
