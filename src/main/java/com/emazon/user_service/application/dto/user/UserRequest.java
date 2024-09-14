@@ -1,5 +1,6 @@
 package com.emazon.user_service.application.dto.user;
 
+import com.emazon.user_service.application.util.SizeValidationConstants;
 import com.emazon.user_service.application.util.ValidationConstantsMessages;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
@@ -18,11 +19,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UserRequest {
     @NotBlank(message = ValidationConstantsMessages.NAME_CANNOT_BE_BLANK)
-    @Size(min = 3, max = 50, message = ValidationConstantsMessages.NAME_SIZE_MESSAGE)
+    @Size(min = SizeValidationConstants.MIN_NAME_SIZE, max = SizeValidationConstants.MAX_NAME_SIZE, message = ValidationConstantsMessages.NAME_SIZE_MESSAGE)
     private String name;
 
     @NotBlank(message = ValidationConstantsMessages.LAST_NAME_CANNOT_BE_BLANK)
-    @Size(min = 3, max = 50, message = ValidationConstantsMessages.LAST_NAME_SIZE_MESSAGE)
+    @Size(min = SizeValidationConstants.MIN_LAST_NAME_SIZE, max = SizeValidationConstants.MAX_LAST_NAME_SIZE, message = ValidationConstantsMessages.LAST_NAME_SIZE_MESSAGE)
     private String lastName;
 
     @NotBlank(message = ValidationConstantsMessages.DNI_CANNOT_BE_BLANK)
@@ -38,12 +39,12 @@ public class UserRequest {
     private LocalDate birthDate;
 
     @NotBlank(message = ValidationConstantsMessages.EMAIL_CANNOT_BE_BLANK)
-    @Max(value = 70, message = ValidationConstantsMessages.EMAIL_SIZE_MESSAGE)
+    @Max(value = SizeValidationConstants.MAX_EMAIL_SIZE, message = ValidationConstantsMessages.EMAIL_SIZE_MESSAGE)
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = ValidationConstantsMessages.EMAIL_REGEX_MESSAGE)
     private String email;
 
     @NotBlank(message = ValidationConstantsMessages.PASSWORD_CANNOT_BE_BLANK)
-    @Size(min = 8, max = 50, message = ValidationConstantsMessages.PASSWORD_REGEX_MESSAGE)
+    @Size(min = SizeValidationConstants.MIN_PASSWORD_SIZE, max = SizeValidationConstants.MAX_PASSWORD_SIZE, message = ValidationConstantsMessages.PASSWORD_REGEX_MESSAGE)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,64}$")
     private String password;
 
