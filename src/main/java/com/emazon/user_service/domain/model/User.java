@@ -2,10 +2,11 @@ package com.emazon.user_service.domain.model;
 
 import com.emazon.user_service.domain.model.builder.UserBuilder;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
-public class User implements UserBuilder {
+public class User implements UserBuilder, Serializable {
     private Long userId;
     private String userName;
     private String userLastName;

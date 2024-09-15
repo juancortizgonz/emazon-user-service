@@ -14,8 +14,16 @@ public interface IUserEntityMapper {
     @Mapping(target = "userRole", source = "userRole", qualifiedByName = "roleSetToString")
     UserEntity toUserEntity(User user);
 
+    @Mapping(target = "userRole", source = "userRole", qualifiedByName = "roleToSetString")
+    User toUser(UserEntity userEntity);
+
     @Named("roleSetToString")
     default RoleEnum roleSetToString(Set<String> userRole) {
         return RoleEnum.valueOf(userRole.iterator().next());
+    }
+
+    @Named("roleToSetString")
+    default Set<String> roleToSetString(RoleEnum userRole) {
+        return Set.of(userRole.name());
     }
 }
