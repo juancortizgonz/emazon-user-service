@@ -22,15 +22,10 @@ public class UserValidation {
         return password != null && password.length() >= 8 && password.length() <= 50;
     }
 
-    private static boolean isUserRoleValid(String role) {
-        return role != null && (role.equals("ADMIN") || role.equals("USER") || role.equals("AUX"));
-    }
-
     public static boolean isUserValid(User user) {
         return isNameValid(user.getUserName())
                 && isLastNameValid(user.getUserLastName())
                 && isEmailValid(user.getUserEmail())
-                && isPasswordValid(user.getUserPassword())
-                && isUserRoleValid(user.getUserRole().getRoleName());
+                && isPasswordValid(user.getUserPassword());
     }
 }

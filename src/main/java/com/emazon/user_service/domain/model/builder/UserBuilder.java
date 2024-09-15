@@ -1,8 +1,7 @@
 package com.emazon.user_service.domain.model.builder;
 
-import com.emazon.user_service.domain.model.Role;
-
 import java.time.LocalDate;
+import java.util.Set;
 
 public interface UserBuilder {
     void setUserId(Long userId);
@@ -13,5 +12,5 @@ public interface UserBuilder {
     void setUserBirthDate(LocalDate userBirthDate);
     void setUserEmail(String userEmail);
     void setUserPassword(String userPassword);
-    void setUserRole(Role role);
+    void setUserRole(Set<String> userRole);
 }

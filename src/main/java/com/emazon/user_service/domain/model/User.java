@@ -3,6 +3,7 @@ package com.emazon.user_service.domain.model;
 import com.emazon.user_service.domain.model.builder.UserBuilder;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class User implements UserBuilder {
     private Long userId;
@@ -13,9 +14,9 @@ public class User implements UserBuilder {
     private LocalDate userBirthDate;
     private String userEmail;
     private String userPassword;
-    private Role userRole;
+    private Set<String> userRole;
 
-    public User(Long userId, String userName, String userLastName, String userDni, String userPhone, LocalDate userBirthDate, String userEmail, String userPassword, Role userRole) {
+    public User(Long userId, String userName, String userLastName, String userDni, String userPhone, LocalDate userBirthDate, String userEmail, String userPassword, Set<String> userRole) {
         this.userId = userId;
         this.userName = userName;
         this.userLastName = userLastName;
@@ -68,7 +69,7 @@ public class User implements UserBuilder {
     }
 
     @Override
-    public void setUserRole(Role role) {
+    public void setUserRole(Set<String> role) {
         this.userRole = role;
     }
 
@@ -104,7 +105,7 @@ public class User implements UserBuilder {
         return userPassword;
     }
 
-    public Role getUserRole() {
+    public Set<String> getUserRole() {
         return userRole;
     }
 }
