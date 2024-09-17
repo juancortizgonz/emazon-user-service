@@ -10,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class AuthenticationService {
     private final IUserRepository userRepository;
     private final AuthenticationManager authenticationManager;
-    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public AuthResponse auth(AuthRequest authRequest) {
         try {
@@ -33,7 +32,9 @@ public class AuthenticationService {
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"))
                     .getUserId();
 
-            return AuthResponse.builder().build();
+            String jwtToken = jwtService.getToken(userDetails, userId);
+
+            return AuthResponse.builder().token(jwtToken).build();
         } catch (UsernameNotFoundException e) {
             throw new AuthenticationFailException("Authentication failed");
         }

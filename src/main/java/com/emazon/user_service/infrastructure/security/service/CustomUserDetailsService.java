@@ -28,4 +28,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userEntityMapper.toUser(userEntity.get());
         return new CustomUserDetails(user);
     }
+
+    public UserDetails loadUserById(Long id) throws UsernameNotFoundException {
+        Optional<UserEntity> userEntity = userRepository.findByUserId(id);
+        if (userEntity.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        User user = userEntityMapper.toUser(userEntity.get());
+        return new CustomUserDetails(user);
+    }
 }
