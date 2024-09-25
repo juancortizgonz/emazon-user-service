@@ -17,4 +17,9 @@ public class UserJpaAdapter implements IUserPersistentPort {
     public void saveUser(User user) {
         userRepository.save(userEntityMapper.toUserEntity(user));
     }
+
+    @Override
+    public boolean isUserEmailExist(String userEmail) {
+        return userRepository.findByUserEmail(userEmail).isPresent();
+    }
 }

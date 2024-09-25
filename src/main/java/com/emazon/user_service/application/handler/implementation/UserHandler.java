@@ -9,15 +9,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
-import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
 public class UserHandler implements IUserHandler {
     private final IUserServicePort userServicePort;
     private final IUserDtoMapper userDtoMapper;
-
-    Logger logger = Logger.getLogger(UserHandler.class.getName());
 
     @Override
     public void createAuxUser(UserRequest userRequest) {

@@ -29,6 +29,7 @@ public class FilterConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/v1/auth/login").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/docs/swagger-ui", "/swagger-ui/**", "/v3/api-docs/**", "/proxy/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();
